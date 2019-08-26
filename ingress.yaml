@@ -1,10 +1,11 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: ingress
+  name: ingress-front
 spec:
   rules:
-  - http:
+  - host: ingress-front
+    http:
       paths:
       - path: /*
         backend:
