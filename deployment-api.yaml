@@ -9,8 +9,8 @@ spec:
   selector:
     app: api
   ports:
-  - name: http
-    port: 8080
+    - name: http
+      port: 8080
 
 ---
 apiVersion: extensions/v1beta1
@@ -27,13 +27,13 @@ spec:
         app: api
     spec:
       containers:
-      - name: api
-        image: oshou/awesome-music-api:latest
-        ports:
-        - containerPort: 8080
+        - name: api
+          image: oshou/awesome-music-api:latest
+          ports:
+            - containerPort: 8080
       imagePullSecrets:
-      - name: regcred
+        - name: regcred
       dnsPolicy: "None"
       dnsConfig:
         nameservers:
-        - 1.1.1.1
+          - 1.1.1.1

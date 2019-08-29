@@ -9,8 +9,8 @@ spec:
   selector:
     app: front
   ports:
-  - name: http
-    port: 3000
+    - name: http
+      port: 3000
 
 ---
 apiVersion: extensions/v1beta1
@@ -27,16 +27,16 @@ spec:
         app: front
     spec:
       containers:
-      - name: front
-        image: oshou/awesome-music-front:latest
-        ports:
-        - containerPort: 3000
-        env:
-        - name: BACKEND_HOST
-          value: localhost:8080
+        - name: front
+          image: oshou/awesome-music-front:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: BACKEND_HOST
+              value: localhost:8080
       imagePullSecrets:
-      - name: regcred
+        - name: regcred
       dnsPolicy: "None"
       dnsConfig:
         nameservers:
-        - 1.1.1.1
+          - 1.1.1.1
