@@ -31,9 +31,18 @@ spec:
           image: oshou/awesome-music-api:latest
           ports:
             - containerPort: 8080
+          env:
+            - name: DB_DRIVER
+              value: mysql
+            - name: DB_HOST
+              value: mysql
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_PASSWORD
+              value: password
+            - name: DB_NAME
+              value: work
+            - name: DB_OPTION
+              value: "charset=utf8&parseTime=True&loc=Asia%2FTokyo"
       imagePullSecrets:
         - name: regcred
-      dnsPolicy: "None"
-      dnsConfig:
-        nameservers:
-          - 1.1.1.1

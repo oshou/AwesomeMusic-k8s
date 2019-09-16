@@ -25,7 +25,7 @@ spec:
       labels:
         app: mysql
     spec:
-      contianers:
+      containers:
         - image: oshou/awesome-music-db:latest
           name: mysql
           ports:
@@ -33,6 +33,12 @@ spec:
               name: mysql
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: password
-          volumeMounts:
-            - name:
+              value: "password"
+            - name: MYSQL_USER
+              value: "roor"
+            - name: MYSQL_DATABASE
+              value: "work"
+            - name: TZ
+              value: "Asia/Tokyo"
+      imagePullSecrets:
+        - name: regcred

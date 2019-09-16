@@ -32,11 +32,7 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: BACKEND_HOST
-              value: localhost:8080
+            - name: API_URL
+              value: "http://api:8080"
       imagePullSecrets:
         - name: regcred
-      dnsPolicy: "None"
-      dnsConfig:
-        nameservers:
-          - 1.1.1.1
