@@ -35,14 +35,14 @@ spec:
             - containerPort: 8080
           env:
             - name: DB_DRIVER
-              value: "mysql"
+              value: "$(DB_DRIVER)"
             - name: DB_HOST
-              value: "db"
+              value: "$(DB_HOST)"
             - name: DB_PORT
-              value: "3306"
+              value: "$(DB_PORT)"
             - name: DB_PASSWORD
-              value: "password"
+              value: "$(DB_PASSWORD)"
             - name: DB_NAME
-              value: "work"
+              value: "$(DB_NAME)"
             - name: DB_OPTION
-              value: "charset=utf8&parseTime=True&loc=Asia%2FTokyo"
+              value: "$(DB_OPTION)"

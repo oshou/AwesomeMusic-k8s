@@ -36,4 +36,4 @@ spec:
             - containerPort: 3000
           env:
             - name: API_URL
-              value: "http://api:8080"
+              value: "$(API_URL)"

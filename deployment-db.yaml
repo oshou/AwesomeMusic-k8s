@@ -36,10 +36,10 @@ spec:
               name: db
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: "password"
+              value: "$(DB_PASSWORD)"
             - name: MYSQL_USER
-              value: "root"
+              value: "$(DB_USER)"
             - name: MYSQL_DATABASE
-              value: "work"
+              value: "$(DB_NAME)"
             - name: TZ
-              value: "Asia/Tokyo"
+              value: "$(DB_TIMEZONE)"
