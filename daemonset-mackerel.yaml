@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
+  name: mackerel-agent
   labels:
     name: mackerel-agent
-  name: mackerel-agent
 spec:
   template:
     metadata:
@@ -16,7 +16,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: apikey
-              value: 7wTWnXP2CHHb51V9UoULEmhj2uhH3HqyU8pCB5xrDWF5
+              value: "$(MACKEREL_API_KEY)"
             - name: opts
               value: -role=development:k8s
             - name: enable_docker_plugin

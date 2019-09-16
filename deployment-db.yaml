@@ -1,44 +1,45 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: db
 spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: db
   ports:
     - port: 3306
-  selector:
-    app: mysql
-  clusterIP: None
 
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: mysql
+  name: db
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: db
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        app: db
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - image: oshou/awesome-music-db:latest
-          name: mysql
+          name: db
           ports:
             - containerPort: 3306
-              name: mysql
+              name: db
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: "password"
             - name: MYSQL_USER
-              value: "roor"
+              value: "root"
             - name: MYSQL_DATABASE
               value: "work"
             - name: TZ
               value: "Asia/Tokyo"
-      imagePullSecrets:
-        - name: regcred

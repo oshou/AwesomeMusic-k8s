@@ -5,12 +5,13 @@ metadata:
   labels:
     app: front
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: front
   ports:
     - name: http
       port: 3000
+      targetPort: 80
 
 ---
 apiVersion: extensions/v1beta1
@@ -26,6 +27,8 @@ spec:
       labels:
         app: front
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: front
           image: oshou/awesome-music-front:latest
@@ -34,5 +37,3 @@ spec:
           env:
             - name: API_URL
               value: "http://api:8080"
-      imagePullSecrets:
-        - name: regcred
