@@ -1,0 +1,9 @@
+commonLabels:
+  app: awesome-music
+resources:
+  - deployment-api.yaml
+  - deployment-db.yaml
+  - deployment-front.yaml
+  - deployment-debug.yaml
+  - ingress.yaml
+  - daemonset-mackerel.yaml
