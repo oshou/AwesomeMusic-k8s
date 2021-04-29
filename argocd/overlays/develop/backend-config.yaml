@@ -1,0 +1,8 @@
+---
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  name: argocd
+spec:
+  securityPolicy:
+    name: "security-policy-for-sample"
