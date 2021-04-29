@@ -1,0 +1,3 @@
+namePrefix: stg-
+bases:
+  - ../../base
