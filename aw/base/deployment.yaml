@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: api
+          image: oshou/AwesomeMusic-api:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_DRIVER
+              value: "$(DB_DRIVER)"
+            - name: DB_HOST
+              value: "$(DB_HOST)"
+            - name: DB_PORT
+              value: "$(DB_PORT)"
+            - name: DB_PASSWORD
+              value: "$(DB_PASSWORD)"
+            - name: DB_NAME
+              value: "$(DB_NAME)"
+            - name: DB_OPTION
+              value: "$(DB_OPTION)"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front
+  labels:
+    app: front
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: front
+          image: oshou/AwesomeMusic-front:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: API_URL
+              value: "$(API_URL)"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  selector:
+    matchLabels:
+      app: db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: db
+          image: oshou/AwesomeMusic-db:latest
+          ports:
+            - containerPort: 3306
+              name: db
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "$(DB_PASSWORD)"
+            - name: MYSQL_USER
+              value: "$(DB_USER)"
+            - name: MYSQL_DATABASE
+              value: "$(DB_NAME)"
+            - name: TZ
+              value: "$(DB_TIMEZONE)"
